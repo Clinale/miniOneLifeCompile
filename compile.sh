@@ -9,6 +9,15 @@ fi
 cd "$(dirname "${0}")/.."
 
 COMPILE_ROOT=$(pwd)
+if [[ $PLATFORM == 1 ]]; then
+    TARGET_PATH="${COMPILE_ROOT}/output/linux/client"
+elif [[ PLATFORM == 2 ]]; then
+	TARGET_PATH="${COMPILE_ROOT}/output/mac/client"
+elif [[ $PLATFORM == 4 ]]; then
+	TARGET_PATH="${COMPILE_ROOT}/output/raspberry/client"
+elif [[ $PLATFORM == 5 ]]; then
+    TARGET_PATH="${COMPILE_ROOT}/output/windows/client"
+fi
 DISCORD_SDK_PATH="$COMPILE_ROOT/dependencies/discord_game_sdk"
 MINOR_GEMS_PATH="$COMPILE_ROOT/minorGems"
 
@@ -27,28 +36,29 @@ cd ../..
 
 
 ##### Create Game Folder
-mkdir -p output
-cd output
+mkdir -p ${TARGET_PATH}
+cd ${TARGET_PATH}
 
 FOLDERS="animations categories ground music objects sounds sprites transitions"
 TARGET="."
-LINK="../OneLifeData7"
-../miniOneLifeCompile/util/createSymLinks.sh $PLATFORM "$FOLDERS" $TARGET $LINK
+LINK="${COMPILE_ROOT}/OneLifeData7"
+${COMPILE_ROOT}/miniOneLifeCompile/util/createLinks.sh $PLATFORM "$FOLDERS" $TARGET $LINK
 
 FOLDERS="graphics otherSounds languages"
 TARGET="."
-LINK="../OneLife/gameSource"
-../miniOneLifeCompile/util/createSymLinks.sh $PLATFORM "$FOLDERS" $TARGET $LINK
+LINK="${COMPILE_ROOT}/OneLife/gameSource"
+${COMPILE_ROOT}/miniOneLifeCompile/util/createLinks.sh $PLATFORM "$FOLDERS" $TARGET $LINK
 
-cp -rn ../OneLife/gameSource/settings .
-cp ../OneLife/gameSource/reverbImpulseResponse.aiff .
-cp ../OneLife/server/wordList.txt .
 
-cp ../OneLifeData7/dataVersionNumber.txt .
+cp -rn "${COMPILE_ROOT}/OneLife/gameSource/settings" .
+cp "${COMPILE_ROOT}/OneLife/gameSource/reverbImpulseResponse.aiff" .
+cp "${COMPILE_ROOT}/OneLife/server/wordList.txt" .
+
+cp "${COMPILE_ROOT}/OneLifeData7/dataVersionNumber.txt" .
 
 # copying SDL.dll, clearCache script and discord_game_sdk library
-if [[ $PLATFORM == 5 ]] && [ ! -f SDL.dll ]; then cp ../OneLife/build/win32/SDL.dll .; fi
-if [[ $PLATFORM == 5 ]] && [ ! -f clearCache.bat ]; then cp ../OneLife/build/win32/clearCache.bat .; fi
+if [[ $PLATFORM == 5 ]] && [ ! -f SDL.dll ]; then cp "${COMPILE_ROOT}/OneLife/build/win32/SDL.dll" .; fi
+if [[ $PLATFORM == 5 ]] && [ ! -f clearCache.bat ]; then cp "${COMPILE_ROOT}/OneLife/build/win32/clearCache.bat" .; fi
 
 if [ -d $DISCORD_SDK_PATH ]; then
 	# windows: copy discord_game_sdk.dll into the output folder
@@ -66,13 +76,14 @@ fi
 ##### Copy to Game Folder and Run
 if [[ $PLATFORM == 5 ]]; then
 	rm -f OneLife.exe
-	cp ../OneLife/gameSource/OneLife.exe .
+	cp ${COMPILE_ROOT}/OneLife/gameSource/OneLife.exe .
 	#rm ../OneLife/gameSource/OneLife.exe # this causes it to wait ~15s without any reason!
-	echo "Starting OneLife.exe"
-	cmd.exe /c OneLife.exe
+	# echo "Starting OneLife.exe"
+	# cmd.exe /c OneLife.exe
 fi
 if [[ $PLATFORM == 1 ]]; then
-	mv -f ../OneLife/gameSource/OneLife .
-	echo "Starting OneLife"
-	./OneLife
+	cp ${COMPILE_ROOT}/OneLife/gameSource/OneLife .
+	# echo "Starting OneLife"
+	# ./OneLife
 fi
+echo "Compile Done!"

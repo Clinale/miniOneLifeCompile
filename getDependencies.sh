@@ -4,11 +4,11 @@ cd "$(dirname "${0}")/.."
 
 sudo apt-get update
 
-sudo apt-get install -y rsync wget unzip
+sudo apt-get install -y rsync wget unzip zstd
 
 sudo apt-get install -y git
 
-sudo apt-get install -y imagemagick xclip libglu1-mesa-dev libgl1-mesa-dev libsdl1.2-dev
+sudo apt-get install -y imagemagick xclip libglu1-mesa-dev libgl1-mesa-dev libsdl1.2-dev libfreetype-dev
 
 sudo apt-get install -y mingw-w64
 
@@ -61,6 +61,22 @@ if [ ! -d l*png* ]; then
 	./configure \
 		--host=i686-w64-mingw32 \
 		--prefix=/usr/i686-w64-mingw32 \
+		CPPFLAGS="-I/usr/i686-w64-mingw32/include" \
+		LDFLAGS="-L/usr/i686-w64-mingw32/lib"
+	make
+	sudo make install
+	popd
+fi
+
+# freetype lib for linux-windows cross compile
+if [ ! -d freetype* ]; then
+	pushd .
+	wget https://sourceforge.net/projects/freetype/files/freetype2/2.13.2/freetype-2.13.2.tar.gz/download -O- | tar xfz -
+	cd freetype*
+	./configure \
+		--host=i686-w64-mingw32 \
+		--prefix=/usr/i686-w64-mingw32 \
+		--with-bzip2=no \
 		CPPFLAGS="-I/usr/i686-w64-mingw32/include" \
 		LDFLAGS="-L/usr/i686-w64-mingw32/lib"
 	make

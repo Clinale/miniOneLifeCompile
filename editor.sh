@@ -9,6 +9,16 @@ fi
 cd "$(dirname "${0}")/.."
 
 ##### Configure and Make
+COMPILE_ROOT=$(pwd)
+if [[ $PLATFORM == 1 ]]; then
+        TARGET_PATH="${COMPILE_ROOT}/output/linux/editor"
+elif [[ PLATFORM == 2 ]]; then
+	TARGET_PATH="${COMPILE_ROOT}/output/mac/editor"
+elif [[ $PLATFORM == 4 ]]; then
+	TARGET_PATH="${COMPILE_ROOT}/output/raspberry/editor"
+elif [[ $PLATFORM == 5 ]]; then
+    TARGET_PATH="${COMPILE_ROOT}/output/windows/editor"
+fi
 cd OneLife
 ./configure $PLATFORM
 
@@ -20,33 +30,33 @@ cd ../..
 
 
 ##### Create Game Folder
-mkdir -p output
-cd output
+mkdir -p ${TARGET_PATH}
+cd ${TARGET_PATH}
 
 FOLDERS="animations categories ground music objects sounds sprites transitions"
 TARGET="."
-LINK="../OneLifeData7"
-../miniOneLifeCompile/util/createSymLinks.sh $PLATFORM "$FOLDERS" $TARGET $LINK
+LINK="${COMPILE_ROOT}/OneLifeData7"
+${COMPILE_ROOT}/miniOneLifeCompile/util/createLinks.sh $PLATFORM "$FOLDERS" $TARGET $LINK
 
 FOLDERS="graphics otherSounds languages"
 TARGET="."
-LINK="../OneLife/gameSource"
-../miniOneLifeCompile/util/createSymLinks.sh $PLATFORM "$FOLDERS" $TARGET $LINK
+LINK="${COMPILE_ROOT}/OneLife/gameSource"
+${COMPILE_ROOT}/miniOneLifeCompile/util/createLinks.sh $PLATFORM "$FOLDERS" $TARGET $LINK
 
-cp -rn ../OneLife/gameSource/settings .
-cp ../OneLife/gameSource/us_english_60.txt .
+cp -rn ${COMPILE_ROOT}/OneLife/gameSource/settings .
+cp ${COMPILE_ROOT}/OneLife/gameSource/us_english_60.txt .
 
-cp ../OneLife/gameSource/reverbImpulseResponse.aiff .
+cp ${COMPILE_ROOT}/OneLife/gameSource/reverbImpulseResponse.aiff .
 
-cp ../OneLifeData7/dataVersionNumber.txt .
+cp ${COMPILE_ROOT}/OneLifeData7/dataVersionNumber.txt .
 
 #missing SDL.dll
-if [[ $PLATFORM == 5 ]] && [ ! -f SDL.dll ]; then cp ../OneLife/build/win32/SDL.dll .; fi
+if [[ $PLATFORM == 5 ]] && [ ! -f SDL.dll ]; then cp ${COMPILE_ROOT}/OneLife/build/win32/SDL.dll .; fi
 
 
 ##### Copy to Game Folder
-if [[ $PLATFORM == 5 ]]; then cp -f ../OneLife/gameSource/EditOneLife.exe .; fi
-if [[ $PLATFORM == 1 ]]; then cp -f ../OneLife/gameSource/EditOneLife .; fi
+if [[ $PLATFORM == 5 ]]; then cp -f ${COMPILE_ROOT}/OneLife/gameSource/EditOneLife.exe .; fi
+if [[ $PLATFORM == 1 ]]; then cp -f ${COMPILE_ROOT}/OneLife/gameSource/EditOneLife .; fi
 
 
 
