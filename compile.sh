@@ -2,8 +2,8 @@
 set -e
 PLATFORM=$(cat PLATFORM_OVERRIDE)
 if [[ $PLATFORM != 1 ]] && [[ $PLATFORM != 5 ]]; then PLATFORM=${1-5}; fi
-if [[ $PLATFORM != 1 ]] && [[ $PLATFORM != 5 ]]; then
-	echo "Usage: 1 for Linux, 5 for XCompiling for Windows (Default)"
+if [[ $PLATFORM > 5 ]]; then
+	echo "Usage: 1 for Linux, 2 for Mac, 3 for Windows on mingw, 4 for Raspberry, 5 for XCompiling for Windows (Default)"
 	exit 1
 fi
 cd "$(dirname "${0}")/.."
