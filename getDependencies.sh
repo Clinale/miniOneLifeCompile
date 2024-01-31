@@ -8,7 +8,7 @@ sudo apt-get install -y rsync wget unzip zstd
 
 sudo apt-get install -y git
 
-sudo apt-get install -y imagemagick xclip libglu1-mesa-dev libgl1-mesa-dev libsdl1.2-dev libfreetype-dev
+sudo apt-get install -y imagemagick xclip libglu1-mesa-dev libgl1-mesa-dev libsdl1.2-dev libfreetype-dev libbrotli-dev
 
 sudo apt-get install -y mingw-w64
 
