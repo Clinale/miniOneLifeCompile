@@ -4,9 +4,9 @@ Scripts to make 2HOL/OHOL client, server and editor.
 
 ## Usage
 
-1. You need to enable WSL/WSL2, follow this tutorial until its 4th step. https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10
+1. You need to enable WSL/WSL2 or to use linux. For WSL/WSL2, follow this tutorial until its 4th step. https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10
 2. Create a new folder, name it say Root, go into it, shift + right click on empty space then select "Open Linux shell here"
-3. Copy and paste the following into the shell: `git clone https://github.com/risvh/miniOneLifeCompile.git miniOneLifeCompile` and hit Enter (That's how you run commands in WSL, the rest of the steps follow similarly.) If you see the error "git command not found", run `sudo apt-get update && sudo apt-get install -y git` first. (It may prompt you for the password you set up in step 1.)
+3. Copy and paste the following into the shell: `git clone https://github.com/Clinale/miniOneLifeCompile.git` and hit Enter (That's how you run commands in WSL, the rest of the steps follow similarly.) If you see the error "git command not found", run `sudo apt-get update && sudo apt-get install -y git` first. (It may prompt you for the password you set up in step 1.)
 4. Run `cd miniOneLifeCompile`, now you are at the miniOneLifeCompile folder in WSL, all the scripts in this repo expect you to be in this folder when you run them. Next time you can simply open the Linux shell in this miniOneLifeCompile folder.
 5. Get the game dependencies `./getDependencies.sh`
 6. Clone the other repositories `./cloneRepos.sh`
