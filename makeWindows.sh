@@ -5,13 +5,16 @@ if [ $# -lt 1 ] ; then
    exit 1
 fi
 
+./cleanOldBuildsAndOptionallyCaches.sh
 ./compile.sh 5
 
 cp ./util/translator.py ../output/windows/client
-python3 ../output/windows/client/translator.py
+cd ../output/windows/client
+python3 translator.py
 
-mv ../output/windows/client ../output/windows/OneLife_v$1
+cd ../
+mv client OneLife_v$1
 echo "done building OneLife_v$1"
 
-zip -r -q ../output/windows/OneLife_Windows_v$1.zip ../output/windows/OneLife_v$1
+zip -r -q OneLife_Windows_v$1.zip OneLife_v$1
 echo "done zipping OneLife_Windows_v$1.zip"
