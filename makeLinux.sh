@@ -9,10 +9,7 @@ fi
 ./compile.sh 1
 
 cp ./util/translator.py ../output/linux/client
-cd ../output/linux/client
-python3 translator.py
-
-cd ..
+cd ../output/linux
 mv client OneLife_v$1
 echo "done building OneLife_v$1"
 
