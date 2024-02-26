@@ -8,7 +8,7 @@ fi
 ./cleanOldBuildsAndOptionallyCaches.sh
 ./compile.sh 5
 
-cp ./util/translator.exe ../output/windows/client
+cp ./util/translator.py ./util/translator-offline.py './util/THOL Translation.xlsx' ../output/windows/client
 cd ../output/windows
 mv client OneLife_v$1
 echo "done building OneLife_v$1"

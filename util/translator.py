@@ -13,7 +13,7 @@ def main():
     else:
         path = dirname(realpath(__file__))
     os.chdir(path)
-    url = 'https://script.google.com/macros/s/AKfycbx0agAIW99KUpLdLQX1ghFaMu81uopoQ7zNqHe7s3D5gWIZO8cb7tLRTGV8Gb8F4saC/exec'
+    url = 'https://script.google.com/macros/s/AKfycbyW4XGbgZY_T-wYey5tHsmHFXOIIobnYaM1v_byt9fkleeR965Sc4p69y2x3N3Aw0CpHA/exec'
 
     try:
         r = requests.get(f'{url}')
