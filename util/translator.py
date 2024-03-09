@@ -64,7 +64,7 @@ def main():
 
     data = r.json()
     for i in range(len(data['key'])):
-        translated = data['value'][i]
+        translated = data['value'][i].strip()
         if translated != '':
             try:
                 with open(f'objects/{data["key"][i]}', encoding='utf-8') as f:

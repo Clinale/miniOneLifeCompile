@@ -51,6 +51,7 @@ def main():
     for i in range(len(keys)):
         translated = data1[i]
         if not pd.isna(translated):
+            translated = translated.strip()
             try:
                 with open(f'objects/{keys[i]}', encoding='utf-8') as f:
                     content = f.readlines()
