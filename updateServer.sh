@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 serverShutdown() {
     server_path=$1
@@ -44,6 +43,8 @@ serverStartUp() {
 
 }
 
+./cleanOldBuildsAndOptionallyCaches.sh
+
 PLATFORM=$(cat PLATFORM_OVERRIDE)
 if [[ $PLATFORM != 1 ]] && [[ $PLATFORM != 5 ]]; then PLATFORM=${1-1}; fi
 if [[ $PLATFORM != 1 ]] && [[ $PLATFORM != 5 ]]; then
@@ -66,6 +67,7 @@ elif [[ $PLATFORM == 5 ]]; then
     TARGET_PATH="${COMPILE_ROOT}/output/windows/server"
 fi
 
+echo $TARGET_PATH
 serverShutdown $TARGET_PATH
 
 cd ${COMPILE_ROOT}/OneLife
