@@ -29,28 +29,9 @@ def main():
     for i in range(len(langs)):
         print(f'{i}: {langs[i]}')
     print(f'Please input 0~{len(langs)-1}: ')
-    while 1:
-        try:
-            lang = int(input())
-            if lang < 0 or lang > len(langs) - 1:
-                raise ValueError
-            break
-        except ValueError:
-            print(f'Please input 0~{len(langs)-1}: ')
+    lang=2 # Chinese Simplified
 
-    print('\nAppend English after translated objects?')
-    print('0: No')
-    print('1: Yes')
-    print('Please input 0~1: ')
-    while 1:
-        try:
-            is_append = int(input())
-            if is_append < 0 or is_append > 1:
-                raise ValueError
-            break
-        except ValueError:
-            print('Please input 0~1: ')
-
+    is_append=1  # append English
     print("Translating Objects...")
 
     if os.path.isfile('objects/cache.fcz'):
@@ -72,10 +53,10 @@ def main():
             except FileNotFoundError as e:
                 print(e)
                 continue
-
-            if is_append and data2['value'][i] != '':
+            data_append = data2['value'][i].strip()
+            if is_append and data_append != '':
                 content[1] = translated.split('#')[0].split(
-                    ' $')[0] + data2['value'][i] + '\n'
+                    ' $')[0].split('@')[0] + data_append + '\n'
             else:
                 content[1] = translated + '\n'
 
@@ -101,7 +82,7 @@ def main():
     r = requests.get(f'{url}?lang={lang}&type=1')
     data = r.json()
 
-    for i in range(len(data['key'])):
+    for i in range(len(data['keys'])):
         if data['value'][i] != '':
             menuItems[data['key'][i]] = data['value'][i]
 
