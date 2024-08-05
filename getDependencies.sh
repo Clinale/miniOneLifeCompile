@@ -21,7 +21,7 @@ cd dependencies
 # Getting SDL
 if [ ! -d SDL* ]; then
 	pushd .
-	wget https://www.libsdl.org/release/SDL-1.2.15.tar.gz -O- | tar xfz -
+	wget --no-check-certificate https://www.libsdl.org/release/SDL-1.2.15.tar.gz -O- | tar xfz -
 	cd SDL*
 	./configure \
 		--bindir=/usr/i686-w64-mingw32/bin \
