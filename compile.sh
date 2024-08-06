@@ -18,7 +18,7 @@ elif [[ $PLATFORM == 4 ]]; then
 elif [[ $PLATFORM == 5 ]]; then
     TARGET_PATH="${COMPILE_ROOT}/output/windows/client"
 fi
-DISCORD_SDK_PATH="$COMPILE_ROOT/dependencies/discord_game_sdk"
+# DISCORD_SDK_PATH="$COMPILE_ROOT/dependencies/discord_game_sdk"
 MINOR_GEMS_PATH="$COMPILE_ROOT/minorGems"
 
 ##### Configure and Make
