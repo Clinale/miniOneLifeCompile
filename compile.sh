@@ -60,7 +60,7 @@ cp "${COMPILE_ROOT}/OneLifeData7/dataVersionNumber.txt" .
 if [[ $PLATFORM == 5 ]] && [ ! -f SDL.dll ]; then cp "${COMPILE_ROOT}/OneLife/build/win32/SDL.dll" .; fi
 if [[ $PLATFORM == 5 ]] && [ ! -f clearCache.bat ]; then cp "${COMPILE_ROOT}/OneLife/build/win32/clearCache.bat" .; fi
 
-if [ -d $DISCORD_SDK_PATH ]; then
+if [[ ! -z $DISCORD_SDK_PATH && -d $DISCORD_SDK_PATH ]]; then
 	# windows: copy discord_game_sdk.dll into the output folder
 	if [[ $PLATFORM == 5 ]]; then cp $DISCORD_SDK_PATH/lib/x86/discord_game_sdk.dll ./; fi
 	# linux: copy discord_game_sdk.so into the output folder
